@@ -120,11 +120,15 @@ export const GROUP_BY = <T>(data: T[], params: GroupingPredicate<T>): any[] => {
   }, {});
 
   const result: any[] = Object.keys(groups).map(value => {
+    const subList = params.thenGroupBy
+    ? GROUP_BY(groups[value], params.thenGroupBy)
+    : params.thenOrderBy
+      ? ORDER_BY(groups[value], params.thenOrderBy)
+      : groups[value];
+      
     return {
       [params.groupingName || params.groupField]: value,
-      [params.subListName || "subList"]: params.thenBy
-        ? GROUP_BY(groups[value], params.thenBy)
-        : groups[value]
+      [params.subListName || "subList"]: subList
     };
   });
 
