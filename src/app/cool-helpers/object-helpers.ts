@@ -2,7 +2,7 @@
  * this file is exclusive for object-related and array-related functions and logics
  */
 
-import { AfterGroupingEnum, SortingOrderEnum } from "./common/enums";
+import { AfterGroupingEnum, CustomSortingCriteria, SortingOrderEnum } from "./common/enums";
 import { GroupingPredicate, SortingPredicate } from "./common/models";
 
 /**
@@ -167,3 +167,35 @@ export const COMPARE_FN = <T>(sp: SortingPredicate<T>, a: T, b: T): number => {
     return 0;
   }
 };
+
+/**
+ * custom sorting order example
+ * @param prop property to check
+ * @param specific specific obj with specific order
+ * @param specificKey prop name to check of the specific obj
+ * @returns index number for sorting
+ *
+ * @example // complex array example
+ * orderBy<T>(
+ +   array,
+ +   {
+ +     sortField: "age",
+ +     order: SortingOrderEnum.ASCENDING,
+ +     fn: (age) => GET_CUSTOM_ORDER(age, this.person, "age"),
+ +     thenBy: {
+ +       sortField: "height",
+ +       order: SortingOrderEnum.ASCENDING
+ +     }
+ +   }
+ + );
+ */
+export const GET_CUSTOM_ORDER = (prop: string, specific: any, specificKey: string): number => {
+  const isSpecificOrCustom = prop in CustomSortingCriteria;
+  const isSpecific = specific[specificKey] == prop;
+
+  return isSpecificOrCustom
+      ? CustomSortingCriteria[prop]
+      : isSpecific
+          ? CustomSortingCriteria.KEY_SPECIFIC
+          : CustomSortingCriteria.KEY_OTHER;
+}
