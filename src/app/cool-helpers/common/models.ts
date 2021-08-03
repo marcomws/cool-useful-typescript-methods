@@ -6,7 +6,8 @@ export class GroupingPredicate<T> {
   groupingName?: string;
   subListName?: string;
   afterGrouping?: AfterGroupingEnum;
-  thenBy?: GroupingPredicate<T>;
+  thenGroupBy?: GroupingPredicate<T>;
+  thenOrderBy?: SortingPredicate<T>;
 }
 
 export class SortingPredicate<T> {
