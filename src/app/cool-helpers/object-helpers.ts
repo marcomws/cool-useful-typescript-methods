@@ -13,7 +13,7 @@ import { GroupingPredicate, SortingPredicate } from "./common/models";
 export const PROPERTY_OF = <T>(key: keyof T) => key;
 
 /**
- * stringify object and it"s values
+ * stringify object and it's values
  * @param o object or any
  * @returns stringified object
  */
@@ -34,7 +34,7 @@ export const STRINGIFY_OBJECT = (o: any) => {
  * @returns array without duplicates
  *
  * @example // complex array example
- * REMOVECONDITIONALDUPLICATES(arr, (a, b) => {
+ * REMOVE_CONDITIONAL_DUPLICATES(arr, (a, b) => {
  *      if (a[key]) { return a[key] === b[key]; }
  *      else return a === b;
  * });
@@ -181,17 +181,18 @@ export const COMPARE_FN = <T>(sp: SortingPredicate<T>, a: T, b: T): number => {
  *
  * @example // complex array example
  * orderBy<T>(
- +   array,
- +   {
- +     sortField: "age",
- +     order: SortingOrderEnum.ASCENDING,
- +     fn: (age) => GET_CUSTOM_ORDER(age, this.person, "age"),
- +     thenBy: {
- +       sortField: "height",
- +       order: SortingOrderEnum.ASCENDING
- +     }
- +   }
- + );
+ *   array,
+ *   {
+ *     sortField: "age",
+ *     order: SortingOrderEnum.ASCENDING,
+ *     fn: (age) => GET_CUSTOM_ORDER(age, this.person, "age"),
+ *     thenBy: {
+ *       sortField: "height",
+ *       order: SortingOrderEnum.ASCENDING,
+ *       fn: (height) => height * 1.10,
+ *     }
+ *   }
+ * );
  */
 export const GET_CUSTOM_ORDER = (prop: string, specific: any, specificKey: string): number => {
   const isSpecificOrCustom = prop in CustomSortingCriteria;
