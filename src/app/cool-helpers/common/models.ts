@@ -1,6 +1,6 @@
 import { AfterGroupingEnum, SortingOrderEnum } from "./enums";
 
-export class GroupingPredicate<T> {
+export interface GroupingPredicate<T> {
   groupField: keyof T;
   fn?: (args: any) => any;
   groupingName?: string;
@@ -10,7 +10,7 @@ export class GroupingPredicate<T> {
   thenOrderBy?: SortingPredicate<T>;
 }
 
-export class SortingPredicate<T> {
+export interface SortingPredicate<T> {
   sortField: keyof T;
   order?: SortingOrderEnum;
   fn?: (args: any) => any;
