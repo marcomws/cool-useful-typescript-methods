@@ -23,6 +23,10 @@ export enum CustomSortingCriteria {
 
   KEY_11 = 2,
 
+  /**
+   * same weight for this custom criteria
+   * maybe to be thenOrderBy else ...
+   */
   KEY_1112 = 3,
   KEY_1113 = 3,
   KEY_1114 = 3,
