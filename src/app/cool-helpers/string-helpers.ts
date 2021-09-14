@@ -102,14 +102,16 @@ export const SHORTEND_LONG_TEXT = (
       return flawStr;
   }
 
-  let segmentation: string = flawStr;
-  findStrs?.forEach((transKey) => {
-    const wordBoundary = new RegExp(`\\b${transKey?.toString()}\\b`, "g");
+  let segmentation: string = flawStr;;
+  const findStrsByLength = findStrs?.sort((a, b) => b?.toString()?.length - a?.toString()?.length);
+
+  findStrsByLength?.forEach((enumKey) => {
+    const wordBoundary = new RegExp(`\\b${enumKey?.toString()}\\b`, "gi");
     segmentation = segmentation
       .split(wordBoundary)
       .join(
         prefix +
-        CustomReplaceEnum[CustomFindEnum[transKey]] +
+        CustomReplaceEnum[CustomFindEnum[enumKey]] +
         suffix
       );
     });
